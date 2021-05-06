@@ -5,6 +5,7 @@ import Meist from "../views/Meist";
 import Liitu from "../views/Liitu";
 import Teenused from "../views/Teenused";
 import Broneeri from "../views/Broneeri"
+import Login from "../views/Login";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/broneeri',
     name: 'Broneeri',
     component: Broneeri
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 
 ]
