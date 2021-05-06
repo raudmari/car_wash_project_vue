@@ -20,7 +20,7 @@ export default {
     return {
       links: [
         {icon: 'today', text: 'Broneeri', route: '/broneeri'},
-        {icon: 'directions_car', text: 'Pesulad ja teenused', route: '/teenused'},
+        {icon: 'local_car_wash', text: 'Pesulad ja teenused', route: '/teenused'},
       ]
 
     }
