@@ -5,8 +5,8 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field v-model="username"
-            label="Kasutaja nimi"
+        <v-text-field v-model="email"
+            label="e-posti aadress"
             prepend-icon="mdi-account-circle"
         ></v-text-field>
         <v-text-field
@@ -30,14 +30,14 @@
 export default {
   data: () => ({
   showPassword: false,
-    'username':'',
+    'email':'',
     'password':'',
 
 }),
   methods: {
     'login': function () {
-      this.https.post('/api/carwash/login', {
-        'username':this.username,
+      this.$http.post('/api/public/carWash/login', {
+        'email':this.email,
         'password':this.password,
       })
           .then(response => {

@@ -1,10 +1,9 @@
 <template>
-  <v-app class="blue">
-    <Navbar />
-    <v-content>
-
+    <v-app>
+      <Navbar />
+    <v-main>
       <router-view></router-view>
-    </v-content>
+    </v-main>
   <Footer/>
   </v-app>
 </template>
