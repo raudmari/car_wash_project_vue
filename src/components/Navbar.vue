@@ -17,7 +17,7 @@
 export default {
   data: () => ({
     links: [
-      {text: 'Loo konto', route: '/liitu'},
+      {text: 'Liitu', route: '/liitu'},
       {text: 'Login', route: '/login'}]
   })
 }
