@@ -1,7 +1,7 @@
 <template>
 
   <v-container fluid>
-<!--    -------------------------KUUPÄEV-->
+    <!--    -------------------------KUUPÄEV-->
     <v-menu
         v-model="menu2"
         :close-on-content-click="false"
@@ -25,7 +25,7 @@
           @input="menu2 = false"
       ></v-date-picker>
     </v-menu>
-<!--    --------------------------------KELLAAEG-->
+    <!--    --------------------------------KELLAAEG-->
     <v-row>
       <v-col
           cols="11"
@@ -72,31 +72,33 @@
         </v-dialog>
       </v-col>
     </v-row>
-<!--          --------------------ASUKOHT-->
+    <!--          --------------------ASUKOHT-->
     <v-col
         cols="12"
         sm="4"
     >
       <v-select
-          v-model="e8"
-          :items="station"
+          v-model="e1"
+          :items="e8"
+          item-text="title"
+          item-value="id"
           :menu-props="{ maxHeight: '400' }"
           label="Asukoht"
-          multiple
           hint="Vali sobiv asukoht"
           persistent-hint
       ></v-select>
     </v-col>
-<!--          -----------------PESU TÜÜP-->
+    <!--          -----------------PESU TÜÜP-->
     <v-col
         cols="12"
         sm="4"
     >
       <v-select
-          v-model="e9"
-          :items="washType"
+          v-model="e2"
+          :items="e9"
+          item-text="title"
+          item-value="id"
           label="Pesu"
-          multiple
           chips
           hint="Vali sobiv pesu"
           persistent-hint
@@ -108,6 +110,7 @@
     >
       <v-btn v-on:click="book()">Broneeri</v-btn>
 
+
     </v-row>
   </v-container>
 </template>
@@ -117,27 +120,44 @@ export default {
   data: function () {
     return {
       'e8': [],
-      station: ['1.Tartu, Pargi tn 1', '2.Tallinn, Aia tn 7'],
       'e9': [],
-      washType: ['1.Tavaline pesu, 15min, 12 eurot', '2.Vahapesu, 15min, 15 eurot', ],
-
+      'e1': '',
+      'e2': '',
       time: null,
       menu2: false,
       modal2: false,
       'date1': '',
-      'time1': ''
+      'time1': '',
+      'date': '',
+      'answer': ''
     }
   },
   methods: {
-    $http: undefined,
+
+    'station': function () {
+      this.$http.get("http://localhost:9090/api/public/carwash/washStation")
+          .then(response => {
+            this.e8 = response.data
+          })
+    },
+    'serviceType': function () {
+      this.$http.get("http://localhost:9090/api/public/carwash/serviceType")
+          .then(response => {
+            this.e9 = response.data
+          })
+    },
     'book': function () {
-      this.$http.post("http://localhost:9090/api/public/carwash/booking" , {
-        date: this.date1,
-        time: this.time1,
+      this.$http.post("http://localhost:9090/api/public/carwash/booking", {
+        serviceTypeId: this.e2,
+        washStationId: this.e1,
+        dateTime: this.date + "T" + this.time,
 
       })
-
     }
+  },
+  mounted: function () {
+    this.station()
+    this.serviceType()
   }
 }
 </script>

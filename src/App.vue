@@ -3,7 +3,7 @@
 
     <v-content>
       <Booking/>
-      <router-view>Booking</router-view>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
