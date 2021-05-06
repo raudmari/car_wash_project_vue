@@ -1,0 +1,163 @@
+<template>
+
+  <v-container fluid>
+    <!--    -------------------------KUUPÄEV-->
+    <v-menu
+        v-model="menu2"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        transition="scale-transition"
+        offset-y
+        min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+            v-model="date"
+            label="Vali kuupäev"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-bind="attrs"
+            v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+          v-model="date"
+          @input="menu2 = false"
+      ></v-date-picker>
+    </v-menu>
+    <!--    --------------------------------KELLAAEG-->
+    <v-row>
+      <v-col
+          cols="11"
+          sm="5"
+      >
+        <v-dialog
+            ref="dialog"
+            v-model="modal2"
+            :return-value.sync="time"
+            persistent
+            width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+                v-model="time"
+                label="Kellaaeg"
+                prepend-icon="mdi-clock-time-four-outline"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker
+              v-if="modal2"
+              v-model="time"
+              full-width
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+                text
+                color="primary"
+                @click="modal2 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+                text
+                color="primary"
+                @click="$refs.dialog.save(time)"
+            >
+              OK
+            </v-btn>
+          </v-time-picker>
+        </v-dialog>
+      </v-col>
+    </v-row>
+    <!--          --------------------ASUKOHT-->
+    <v-col
+        cols="12"
+        sm="4"
+    >
+      <v-select
+          v-model="e1"
+          :items="e8"
+          item-text="title"
+          item-value="id"
+          :menu-props="{ maxHeight: '400' }"
+          label="Asukoht"
+          hint="Vali sobiv asukoht"
+          persistent-hint
+      ></v-select>
+    </v-col>
+    <!--          -----------------PESU TÜÜP-->
+    <v-col
+        cols="12"
+        sm="4"
+    >
+      <v-select
+          v-model="e2"
+          :items="e9"
+          item-text="title"
+          item-value="id"
+          label="Pesu"
+          chips
+          hint="Vali sobiv pesu"
+          persistent-hint
+      ></v-select>
+    </v-col>
+    <v-row
+        align="center"
+        justify="space-around"
+    >
+      <v-btn v-on:click="book()">Broneeri</v-btn>
+
+
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      'e8': [],
+      'e9': [],
+      'e1': '',
+      'e2': '',
+      time: null,
+      menu2: false,
+      modal2: false,
+      'date1': '',
+      'time1': '',
+      'date': '',
+      'answer': ''
+    }
+  },
+  methods: {
+
+    'station': function () {
+      this.$http.get("http://localhost:9090/api/public/carwash/washStation")
+          .then(response => {
+            this.e8 = response.data
+          })
+    },
+    'serviceType': function () {
+      this.$http.get("http://localhost:9090/api/public/carwash/serviceType")
+          .then(response => {
+            this.e9 = response.data
+          })
+    },
+    'book': function () {
+      this.$http.post("http://localhost:9090/api/public/carwash/booking", {
+        serviceTypeId: this.e2,
+        washStationId: this.e1,
+        dateTime: this.date + "T" + this.time,
+
+      })
+    }
+  },
+  mounted: function () {
+    this.station()
+    this.serviceType()
+  }
+}
+</script>
