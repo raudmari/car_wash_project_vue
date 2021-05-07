@@ -15,10 +15,11 @@ import Footer from "./components/Footer";
 import MainList from "./components/MainList";
 import Login from "./components/Login";
 import Stations from "./components/Stations";
+import Services from "./components/Services";
 
 export default {
   name: 'App',
-  components:{Navbar, Footer, MainList, Login, Stations},
+  components:{Navbar, Footer, MainList, Login, Stations, Services},
   data () {
   return {
       //

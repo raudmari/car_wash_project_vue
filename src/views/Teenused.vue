@@ -1,14 +1,19 @@
 <template>
   <div>
-    <h1>Teenused</h1>
+    <h1 align="center" class="text-uppercase"> Teenused ja Pesulad</h1>
+    <clo >
+
+    </clo>
+    <Services />
     <Stations />
   </div>
 </template>
 
 <script>
 import Stations from "../components/Stations";
+import Services from "../components/Services";
 export default {
-  components: {Stations}
+  components: {Stations, Services}
 
 }
 </script>
