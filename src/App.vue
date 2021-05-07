@@ -2,7 +2,7 @@
     <v-app>
       <Navbar />
     <v-main>
-
+      <Booking/>
       <router-view></router-view>
     </v-main>
   <Footer/>
@@ -16,10 +16,10 @@ import MainList from "./components/MainList";
 import Login from "./components/Login";
 import Stations from "./components/Stations";
 import Services from "./components/Services";
-
+import Booking from "@/components/Booking";
 export default {
   name: 'App',
-  components:{Navbar, Footer, MainList, Login, Stations, Services},
+  components:{Navbar, Footer, MainList, Login, Stations, Services, Booking},
   data () {
   return {
       //
@@ -27,4 +27,10 @@ export default {
   }
 }
 
+  components:{Booking},
+
+  data: () => ({
+    //
+  }),
+};
 </script>
