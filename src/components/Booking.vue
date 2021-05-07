@@ -9,6 +9,7 @@
         transition="scale-transition"
         offset-y
         min-width="auto"
+
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
@@ -80,12 +81,12 @@
       <v-select
           v-model="e1"
           :items="e8"
-          item-text="title"
           item-value="id"
           :menu-props="{ maxHeight: '400' }"
           label="Asukoht"
           hint="Vali sobiv asukoht"
           persistent-hint
+
       ></v-select>
     </v-col>
     <!--          -----------------PESU TÜÜP-->
@@ -96,7 +97,6 @@
       <v-select
           v-model="e2"
           :items="e9"
-          item-text="title"
           item-value="id"
           label="Pesu"
           chips
@@ -108,10 +108,20 @@
         align="center"
         justify="space-around"
     >
-      <v-btn v-on:click="book()">Broneeri</v-btn>
-
-
+      <v-btn class="ma-2"
+      outlined
+      color="indigo"
+             large
+             v-on:click="book()"
+      >
+        BRONEERI
+      </v-btn>
     </v-row>
+   <v-card-text>
+     {{message}}
+   </v-card-text>
+
+
   </v-container>
 </template>
 
@@ -129,7 +139,10 @@ export default {
       'date1': '',
       'time1': '',
       'date': '',
-      'answer': ''
+      'answer': '',
+     'message': ''
+
+
     }
   },
   methods: {
@@ -152,7 +165,15 @@ export default {
         washStationId: this.e1,
         dateTime: this.date + "T" + this.time,
 
+       }).then(response => {
+        let selectedLocationObject=  this.e8.find(x => x.id == this.e1);
+        let selectedWashObject = this.e9.find(y => y.id == this.e2);
+        this.message = "Aitäh, teie broneering on vastu võetud! " + this.date + " " + this.time + selectedLocationObject.text + selectedWashObject.text
+        response.text = this.message
       })
+
+      .catch(() => alert("Error"))
+
     }
   },
   mounted: function () {
