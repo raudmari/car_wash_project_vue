@@ -23,6 +23,7 @@
         </v-btn>
       </v-form>
     </v-card-text>
+    {{answerInfo}}
   </v-card>
 
 </template>
@@ -32,6 +33,7 @@ export default {
   showPassword: false,
     'email':'',
     'password':'',
+    'answerInfo':''
 
 }),
   methods: {
@@ -50,7 +52,13 @@ export default {
             this.answerInfo = response.response.data.message
           })
     }
+  },
+    'logOut': function () {
+    localStorage.removeItem('user-token')
+    location.reload()
+    this.answerInfo = "LogOut success!"
   }
+
 }
 
 </script>
