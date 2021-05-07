@@ -2,6 +2,7 @@
     <v-app>
       <Navbar />
     <v-main>
+
       <router-view></router-view>
     </v-main>
   <Footer/>
@@ -13,10 +14,11 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MainList from "./components/MainList";
 import Login from "./components/Login";
+import Stations from "./components/Stations";
 
 export default {
   name: 'App',
-  components:{Navbar, Footer, MainList, Login},
+  components:{Navbar, Footer, MainList, Login, Stations},
   data () {
   return {
       //
