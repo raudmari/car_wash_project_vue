@@ -3,11 +3,11 @@
     <br>
     <div align="center">
       <table>
-        <th align="left" class="display-1">Pesu tüüp</th>
-        <th align="left" class="display-1">Hind</th>
-        <th align="left" class="display-1">Kestvus</th>
+        <th align="left" class="display-1">Pesu</th>
+        <th align="left" class="display-1">€</th>
+        <th align="left" class="display-1">min</th>
         <tr align="left" class="text-h6"  v-for="service in allServices">
-          <td>{{service.washType}}</td>
+          <td >{{service.washType}}</td>
           <td>{{service.price}}</td>
           <td>{{service.duration}}</td>
         </tr>

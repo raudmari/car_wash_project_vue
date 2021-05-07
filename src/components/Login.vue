@@ -44,19 +44,15 @@ export default {
       })
           .then(response => {
             console.log(response);
-            localStorage.setItem('user-token', token)
-            this.$http.defaults.headers.common['Authorization'] = "Bearer " + token
+            localStorage.setItem('user-token', response.data)
+            this.$http.defaults.headers.common['Authorization'] = "Bearer " + response.data
+            this.$store.commit("login",true)
             this.answerInfo = "Login success!"
           })
           .catch(response => {
             this.answerInfo = response.response.data.message
           })
     }
-  },
-    'logOut': function () {
-    localStorage.removeItem('user-token')
-    location.reload()
-    this.answerInfo = "LogOut success!"
   }
 
 }

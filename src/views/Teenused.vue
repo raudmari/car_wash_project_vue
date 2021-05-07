@@ -1,9 +1,6 @@
 <template>
   <div>
     <h1 align="center" class="text-uppercase"> Teenused ja Pesulad</h1>
-    <clo >
-
-    </clo>
     <Services />
     <Stations />
   </div>

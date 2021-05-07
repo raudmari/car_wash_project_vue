@@ -7,8 +7,9 @@
         <span class="font-weight-bold">pesu</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-for="link in links" :key="link.text" router :to="link.route" color="white" text rounded class="my-2"><span>{{link.text}}</span>
-      </v-btn>
+      <v-btn to='/liitu' color="white"  text rounded class="my-2">Liitu</v-btn>
+      <v-btn to='/' v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
+      <v-btn to='/login' v-if="!$store.state.authenticated" color="white" text rounded class="my-2">Login</v-btn>
 
     </v-toolbar>
   </nav>
@@ -16,9 +17,14 @@
 <script>
 export default {
   data: () => ({
-    links: [
-      {text: 'Liitu', route: '/liitu'},
-      {text: 'Login', route: '/login'}]
-  })
+  }),
+  methods: {
+    'logOut': function () {
+      localStorage.removeItem('user-token')
+      location.reload()
+      this.$store.commit("login",false)
+      this.answerInfo = "LogOut success!"
+    }
+  }
 }
 </script>
