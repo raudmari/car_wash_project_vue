@@ -6,6 +6,8 @@ import Liitu from "../views/Liitu";
 import Teenused from "../views/Teenused";
 import Broneeri from "../views/Broneeri"
 import Login from "../views/Login";
+import JoinPopup from '../components/JoinPopup'
+import Booking from "@/components/Booking";
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/JoinPopup',
+    name: 'JoinPopup',
+    component: JoinPopup
+  },
+  {
+    path: '/Booking',
+    name: 'Booking',
+    component: Booking
   }
 
 ]
