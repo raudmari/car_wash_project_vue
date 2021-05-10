@@ -103,7 +103,6 @@
             :items="dbWashType"
             item-value="id"
             label="Pesu"
-            chips
             hint="Vali sobiv pesu"
             persistent-hint
         ></v-select>
@@ -126,6 +125,8 @@
       <div class="mt-12 bottom-nav deprecated-label font-italic">
         <v-card-text>
           {{ message }}
+          <v-spacer></v-spacer>
+            {{pinAnswer}}
         </v-card-text>
       </div>
     </v-container>
@@ -147,7 +148,9 @@ export default {
       'time1': '',
       'date': '',
       'answer': '',
-      'message': ''
+      'message': '',
+      'pinAnswer': '',
+      'pin': ''
 
 
     }
@@ -176,7 +179,8 @@ export default {
         let selectedLocationObject = this.dbStation.find(x => x.id == this.stationInsert);
         let selectedWashObject = this.dbWashType.find(y => y.id == this.washTypeInsert);
         this.message = "Aitäh, teie broneering on vastu võetud! Kuupäev: " + this.date + " Kellaaeg " + this.time + " Asukoht: " + selectedLocationObject.text + " Pesu tüüp: " + selectedWashObject.text
-        response.text = this.message
+        this.pin = response.data
+        this.pinAnswer = "Teie pin on: " + this.pin
       })
 
           .catch(() => alert("Error"))
