@@ -8,6 +8,7 @@
         <v-text-field v-model="email"
             label="e-posti aadress"
             prepend-icon="mdi-account-circle"
+            :rules="[rules.required, rules.emailRules]"
         ></v-text-field>
         <v-text-field
             v-model="password"
@@ -32,7 +33,12 @@ export default {
   showPassword: false,
     'email':'',
     'password':'',
-    'answerInfo':''
+    'answerInfo':'',
+    rules: {
+       emailRules: v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Vale emaili aadress!',
+    },
+
+
 
 }),
   methods: {
