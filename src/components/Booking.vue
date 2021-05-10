@@ -108,7 +108,6 @@
             item-value="id"
             label="Pesu"
             prepend-icon="local_car_wash"
-            chips
             hint="Vali sobiv pesu"
             persistent-hint
         ></v-select>
