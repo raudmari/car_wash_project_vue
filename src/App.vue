@@ -1,21 +1,28 @@
 <template>
-  <v-app>
-
-    <v-content>
-      <Booking/>
+    <v-app>
+      <Navbar />
+    <v-main>
       <router-view></router-view>
-    </v-content>
+    </v-main>
+  <Footer/>
   </v-app>
 </template>
 
 <script>
-import Booking from "@/components/Booking";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import MainList from "./components/MainList";
+import Login from "./components/Login";
+import Stations from "./components/Stations";
+import Services from "./components/Services";
+import Booking from "./components/Booking";
 export default {
   name: 'App',
-  components:{Booking},
-
-  data: () => ({
-    //
-  }),
-};
+  components:{Navbar, Footer, MainList, Login, Stations, Services, Booking},
+  data () {
+  return {
+      //
+    }
+  }
+}
 </script>
