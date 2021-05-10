@@ -1,19 +1,34 @@
 
 <template>
   <nav>
-    <v-toolbar flat app class="blue lighten-2" dark>
-      <v-toolbar-title class="text-uppercase white--text">
-        <span class="font-weight-light">auto</span>
-        <span class="font-weight-bold">pesu</span>
-      </v-toolbar-title>
+
+    <v-app-bar flat app class="blue lighten-2" dark>
+      <v-app-bar-nav-icon class="blue lighten-2" dark @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <span class="font-weight-light">auto</span>
+      <span class="font-weight-bold">pesu</span>
       <v-spacer></v-spacer>
+
       <v-btn to='/liitu' color="white"  text rounded class="my-2">Liitu</v-btn>
       <v-btn to='/' v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
       <v-btn to='/login' v-if="!$store.state.authenticated" color="white" text rounded class="my-2">Login</v-btn>
+    </v-app-bar>
+    <v-navigation-drawer app v-model="drawer" class="blue lighten-2">
+      <v-list>
+        <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+          <v-list-item-action>
+            <v-icon class="white--text">{{ link.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="white--text">{{ link.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
 
-    </v-toolbar>
+    </v-navigation-drawer>
   </nav>
 </template>
+
 <script>
 export default {
   data: () => ({
@@ -28,3 +43,35 @@ export default {
   }
 }
 </script>
+
+<script>
+import JoinPopup from "@/components/JoinPopup";
+export default {
+  components: { JoinPopup },
+  data() {
+    return {
+      drawer: false,
+      snackbar: false,
+      timeout: 5000,
+      text: 'Uus konto on loodud!',
+
+      links: [
+        {icon: 'mdi-home', text: 'Pealehele', route: '/'},
+        {icon: 'mdi-login', text: 'Login', route: '/Login'},
+        {icon: 'mdi-account', text: 'Liitu', route: '/JoinPopup'},
+        {icon: 'mdi-book_online', text: 'Broneeri', route: '/Booking'},
+        {icon: 'mdi-local_car_wash', text: 'Pesulad/Teenused', route: '/teenused'},
+        {icon: '<v-icon>mdi-local_car_wash</v-icon>', text: 'Meeskond/Kontakt', route: '/meist'},
+      ]
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+main{
+  background-image: url('Untitled.jpg') ;
+}
+
+</style>
