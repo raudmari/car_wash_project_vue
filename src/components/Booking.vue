@@ -108,7 +108,6 @@
             item-value="id"
             label="Pesu"
             prepend-icon="local_car_wash"
-            chips
             hint="Vali sobiv pesu"
             persistent-hint
         ></v-select>
@@ -130,6 +129,7 @@
       </v-row>
       <v-card-text>
         {{ message }}
+        {{ pinAnswer }}
       </v-card-text>
 
     </v-container>
@@ -151,7 +151,10 @@ export default {
       'time1': '',
       'date': '',
       'answer': '',
-      'message': ''
+      'message': '',
+      'id': '',
+      'pin': '',
+      'pinAnswer': ''
     }
   },
   methods: {
@@ -177,12 +180,12 @@ export default {
       }).then(response => {
         let selectedLocationObject = this.e8.find(x => x.id == this.e1);
         let selectedWashObject = this.e9.find(y => y.id == this.e2);
-        this.message = "Aitäh, teie broneering on vastu võetud! " + this.date + " " + this.time + selectedLocationObject.text + selectedWashObject.text
-        response.text = this.message
+        this.message = "Aitäh, teie broneering on vastu võetud! " + this.date + " " + this.time + selectedLocationObject.text + " " + selectedWashObject.text
+        this.pin = response.data
+        this.pinAnswer = "Teie pin on: " + this.pin
       })
 
           .catch(() => alert("Error"))
-
     }
   },
   mounted: function () {
