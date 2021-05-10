@@ -121,7 +121,7 @@
           BRONEERI
         </v-btn>
       </v-row>
-<!--      -----------------SÕNUM PEALE BRONEERIMIST-->
+<!--      ---------Muudatus--------SÕNUM PEALE BRONEERIMIST-->
       <div class="mt-12 bottom-nav deprecated-label font-italic">
         <v-card-text>
           {{ message }}
