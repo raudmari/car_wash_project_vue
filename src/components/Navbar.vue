@@ -9,7 +9,7 @@
       <span class="font-weight-bold">pesu</span>
       <v-spacer></v-spacer>
 
-      <v-btn to='/liitu' color="white"  text rounded class="my-2">Liitu</v-btn>
+      <v-btn to='/JoinPopup' color="white"  text rounded class="my-2">Liitu</v-btn>
       <v-btn to='/' v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
       <v-btn to='/login' v-if="!$store.state.authenticated" color="white" text rounded class="my-2">Login</v-btn>
     </v-app-bar>
@@ -60,8 +60,8 @@ export default {
         {icon: 'mdi-login', text: 'Login', route: '/Login'},
         {icon: 'mdi-account', text: 'Liitu', route: '/JoinPopup'},
         {icon: 'mdi-book_online', text: 'Broneeri', route: '/Booking'},
-        {icon: 'mdi-local_car_wash', text: 'Pesulad/Teenused', route: '/teenused'},
-        {icon: '<v-icon>mdi-local_car_wash</v-icon>', text: 'Meeskond/Kontakt', route: '/meist'},
+        {icon: 'mdi-local-car-wash', text: 'Pesulad/Teenused', route: '/teenused'},
+        {icon: '<v-icon>mdi-local-car-wash</v-icon>', text: 'Meeskond/Kontakt', route: '/meist'},
       ]
     }
   }
