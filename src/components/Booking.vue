@@ -2,20 +2,6 @@
   <div align="center">
     <v-container fluid>
       <!--    -------------------------KUUPÄEV-->
-      <v-col
-          cols="12"
-          sm="4"
-      >
-        <v-menu
-            v-model="menu2"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-  <div align="center">
-    <v-container fluid>
-      <!--    -------------------------KUUPÄEV-->
       <v-row justify="center">
         <v-col cols="12" sm="4">
           <v-menu
@@ -185,52 +171,56 @@
             hint="Vali sobiv asukoht"
             persistent-hint
 
-      ></v-select>
-    </v-col>
-    <!--          -----------------PESU TÜÜP-->
-    <v-col
-        cols="12"
-        sm="4"
-    >
-      <v-select
-          v-model="e2"
-          :items="e9"
-          item-value="id"
-          label="Pesu"
-          chips
-          hint="Vali sobiv pesu"
-          persistent-hint
-      ></v-select>
-    </v-col>
-    <v-row
-        align="center"
-        justify="space-around"
-    >
-      <v-btn class="ma-2"
-      outlined
-      color="indigo"
-             large
-             v-on:click="book()"
+        ></v-select>
+      </v-col>
+      <!--          -----------------PESU TÜÜP-->
+      <v-col
+          cols="12"
+          sm="4"
       >
-        BRONEERI
-      </v-btn>
-    </v-row>
-   <v-card-text>
-     {{message}}
-   </v-card-text>
-
-
-  </v-container>
+        <v-select
+            v-model="washTypeInsert"
+            :items="dbWashType"
+            item-value="id"
+            label="Pesu"
+            hint="Vali sobiv pesu"
+            persistent-hint
+        ></v-select>
+      </v-col>
+<!--      ----------------------BRONEERI NUPP-->
+      <v-row
+          align="center"
+          justify="space-around"
+      >
+        <v-btn class="ma-2"
+               outlined
+               color="indigo"
+               large
+               v-on:click="book()"
+        >
+          BRONEERI
+        </v-btn>
+      </v-row>
+<!--      -----------------SÕNUM PEALE BRONEERIMIST-->
+      <div class="mt-12 bottom-nav deprecated-label font-italic">
+        <v-card-text>
+          {{ message }}
+          <v-spacer></v-spacer>
+            {{pinAnswer}}
+        </v-card-text>
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   data: function () {
     return {
-      'e8': [],
-      'e9': [],
-      'e1': '',
-      'e2': '',
+      'dbStation': [],
+      'dbWashType': [],
+      'stationInsert': '',
+      'washTypeInsert': '',
       time: null,
       menu2: false,
       modal2: false,
@@ -238,7 +228,9 @@ export default {
       'time1': '',
       'date': '',
       'answer': '',
-     'message': ''
+      'message': '',
+      'pinAnswer': '',
+      'pin': ''
 
 
     }
@@ -248,29 +240,30 @@ export default {
     'station': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/washStation")
           .then(response => {
-            this.e8 = response.data
+            this.dbStation = response.data
           })
     },
     'serviceType': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/serviceType")
           .then(response => {
-            this.e9 = response.data
+            this.dbWashType = response.data
           })
     },
     'book': function () {
       this.$http.post("http://localhost:9090/api/public/carwash/booking", {
-        serviceTypeId: this.e2,
-        washStationId: this.e1,
+        serviceTypeId: this.washTypeInsert,
+        washStationId: this.stationInsert,
         dateTime: this.date + "T" + this.time,
 
-       }).then(response => {
-        let selectedLocationObject=  this.e8.find(x => x.id == this.e1);
-        let selectedWashObject = this.e9.find(y => y.id == this.e2);
-        this.message = "Aitäh, teie broneering on vastu võetud! " + this.date + " " + this.time + selectedLocationObject.text + selectedWashObject.text
-        response.text = this.message
+      }).then(response => {
+        let selectedLocationObject = this.dbStation.find(x => x.id == this.stationInsert);
+        let selectedWashObject = this.dbWashType.find(y => y.id == this.washTypeInsert);
+        this.message = "Aitäh, teie broneering on vastu võetud! Kuupäev: " + this.date + " Kellaaeg " + this.time + " Asukoht: " + selectedLocationObject.text + " Pesu tüüp: " + selectedWashObject.text
+        this.pin = response.data
+        this.pinAnswer = "Teie pin on: " + this.pin
       })
 
-      .catch(() => alert("Error"))
+          .catch(() => alert("Error"))
 
     }
   },
