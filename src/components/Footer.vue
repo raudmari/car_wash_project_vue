@@ -22,9 +22,10 @@
 export default {
   data: () => ({
     links: [
-      {text: 'Pealehele', route: '/'},
+      { text: 'Pealehele', route: '/'},
+      { text: 'Broneeri', route: '/broneeri'},
       { text: 'Pesulad / teenused', route: '/teenused' },
-      { text: 'Meeskond / kontakt', route: '/meist'},
+      { text: 'Meeskond / kontakt', route: '/meist'}
     ],
   }),
 }
