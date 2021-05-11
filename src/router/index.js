@@ -7,7 +7,7 @@ import Teenused from "../views/Teenused";
 import Broneeri from "../views/Broneeri"
 import Login from "../views/Login";
 import JoinPopup from '../components/JoinPopup'
-import Booking from "@/components/Booking";
+import Booking from "../components/Booking";
 
 Vue.use(VueRouter)
 
