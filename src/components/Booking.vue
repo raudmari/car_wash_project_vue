@@ -29,6 +29,7 @@
           <v-date-picker
               v-model="date"
               @input="menu2 = false"
+              :allowed-dates="allowedDates"
           ></v-date-picker>
         </v-menu>
       </v-col>
@@ -192,7 +193,9 @@ export default {
 
           .catch(() => alert("Error"))
 
-    }
+    },
+    allowedDates: val => Date.parse(val) > Date.now() - 8.64e7,
+
   },
   mounted: function () {
     this.station()
