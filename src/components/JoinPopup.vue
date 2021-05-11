@@ -167,7 +167,7 @@ export default {
         this.snackbar1 = true;
         this.loading = true;
 
-        this.$http.post('http://localhost:9090/carWash/newAccountJoin', {
+        this.$http.post('api/public/carWash/newAccountJoin', {
           firstName: this.Eesnimi,
           lastName: this.Perekonnanimi,
           phone: this.Telefon,
