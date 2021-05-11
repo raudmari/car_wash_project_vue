@@ -2,19 +2,19 @@
   <div align="center">
     <v-container fluid>
       <!--    -------------------------KUUPÄEV-->
-      <v-col
-          cols="12"
-          sm="4"
-      >
-        <v-menu
-            v-model="menu2"
-            :close-on-content-click="false"
-            :nudge-right="40"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
+      <v-row justify="center">
+        <v-col cols="12" sm="4">
+          <v-menu
+              v-model="menu2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
 
         >
+
+
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
                 v-model="date"
@@ -94,6 +94,84 @@
             prepend-icon="location_city"
             hint="Vali sobiv asukoht"
             persistent-hint
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                  v-model="date"
+                  label="Vali kuupäev"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+                v-model="date"
+                @input="menu2 = false"
+            ></v-date-picker>
+          </v-menu>
+        </v-col>
+      </v-row>
+      <!--    --------------------------------KELLAAEG-->
+      <v-row justify="center">
+        <v-col
+            cols="12"
+            sm="4"
+        >
+          <v-dialog
+              ref="dialog"
+              v-model="modal2"
+              :return-value.sync="time"
+              persistent
+              width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                  v-model="time"
+                  label="Kellaaeg"
+                  prepend-icon="mdi-clock-time-four-outline"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+              ></v-text-field>
+            </template>
+            <v-time-picker
+                v-if="modal2"
+                v-model="time"
+                full-width
+            >
+              <v-spacer></v-spacer>
+              <v-btn
+                  text
+                  color="primary"
+                  @click="modal2 = false"
+              >
+                Cancel
+              </v-btn>
+              <v-btn
+                  text
+                  color="primary"
+                  @click="$refs.dialog.save(time)"
+              >
+                OK
+              </v-btn>
+            </v-time-picker>
+          </v-dialog>
+        </v-col>
+      </v-row>
+      <!--          --------------------ASUKOHT-->
+      <v-col
+          cols="12"
+          sm="4"
+      >
+        <v-select
+            v-model="stationInsert"
+            :items="dbStation"
+            item-value="id"
+            :menu-props="{ maxHeight: '400' }"
+            label="Asukoht"
+            hint="Vali sobiv asukoht"
+            persistent-hint
 
         ></v-select>
       </v-col>
@@ -103,35 +181,36 @@
           sm="4"
       >
         <v-select
-            v-model="e2"
-            :items="e9"
+            v-model="washTypeInsert"
+            :items="dbWashType"
             item-value="id"
             label="Pesu"
-            prepend-icon="local_car_wash"
             hint="Vali sobiv pesu"
             persistent-hint
         ></v-select>
       </v-col>
+<!--      ----------------------BRONEERI NUPP-->
       <v-row
-          align="left"
+          align="center"
           justify="space-around"
       >
         <v-btn class="ma-2"
-               color="blue lighten-2"
-               dark
+               outlined
+               color="indigo"
                large
-               rounded
-
                v-on:click="book()"
         >
           BRONEERI
         </v-btn>
       </v-row>
-      <v-card-text>
-        {{ message }}
-        {{ pinAnswer }}
-      </v-card-text>
-
+<!--      -----------------SÕNUM PEALE BRONEERIMIST-->
+      <div class="mt-12 bottom-nav deprecated-label font-italic">
+        <v-card-text>
+          {{ message }}
+          <v-spacer></v-spacer>
+            {{pinAnswer}}
+        </v-card-text>
+      </div>
     </v-container>
   </div>
 </template>
@@ -140,10 +219,10 @@
 export default {
   data: function () {
     return {
-      'e8': [],
-      'e9': [],
-      'e1': '',
-      'e2': '',
+      'dbStation': [],
+      'dbWashType': [],
+      'stationInsert': '',
+      'washTypeInsert': '',
       time: null,
       menu2: false,
       modal2: false,
@@ -152,9 +231,10 @@ export default {
       'date': '',
       'answer': '',
       'message': '',
-      'id': '',
-      'pin': '',
-      'pinAnswer': ''
+      'pinAnswer': '',
+      'pin': ''
+
+
     }
   },
   methods: {
@@ -162,30 +242,31 @@ export default {
     'station': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/washStation")
           .then(response => {
-            this.e8 = response.data
+            this.dbStation = response.data
           })
     },
     'serviceType': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/serviceType")
           .then(response => {
-            this.e9 = response.data
+            this.dbWashType = response.data
           })
     },
     'book': function () {
       this.$http.post("http://localhost:9090/api/public/carwash/booking", {
-        serviceTypeId: this.e2,
-        washStationId: this.e1,
+        serviceTypeId: this.washTypeInsert,
+        washStationId: this.stationInsert,
         dateTime: this.date + "T" + this.time,
 
       }).then(response => {
-        let selectedLocationObject = this.e8.find(x => x.id == this.e1);
-        let selectedWashObject = this.e9.find(y => y.id == this.e2);
-        this.message = "Aitäh, teie broneering on vastu võetud! " + this.date + " " + this.time + selectedLocationObject.text + " " + selectedWashObject.text
+        let selectedLocationObject = this.dbStation.find(x => x.id == this.stationInsert);
+        let selectedWashObject = this.dbWashType.find(y => y.id == this.washTypeInsert);
+        this.message = "Aitäh, teie broneering on vastu võetud! Kuupäev: " + this.date + " Kellaaeg " + this.time + " Asukoht: " + selectedLocationObject.text + " Pesu tüüp: " + selectedWashObject.text
         this.pin = response.data
         this.pinAnswer = "Teie pin on: " + this.pin
       })
 
           .catch(() => alert("Error"))
+
     }
   },
   mounted: function () {
