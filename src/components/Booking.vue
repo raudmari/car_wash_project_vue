@@ -121,8 +121,10 @@
           justify="space-around"
       >
         <v-btn class="ma-2"
-               outlined
-               color="indigo"
+
+               rounded
+               dark
+               color="blue lighten-2"
                large
                v-on:click="book()"
         >

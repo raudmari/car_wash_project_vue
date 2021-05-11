@@ -8,6 +8,7 @@ import Broneeri from "../views/Broneeri"
 import Login from "../views/Login";
 import JoinPopup from '../components/JoinPopup'
 import Booking from "../components/Booking";
+import Account from "../components/Account";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/Booking',
     name: 'Booking',
     component: Booking
+  },
+  {
+    path: '/Account',
+    name: 'Account',
+    component: Account
   }
 
 ]

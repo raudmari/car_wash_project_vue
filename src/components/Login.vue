@@ -52,6 +52,7 @@ export default {
             localStorage.setItem('user-token', response.data)
             this.$http.defaults.headers.common['Authorization'] = "Bearer " + response.data
             this.$store.commit("login",true)
+            this.$store.commit("account", false)
             this.answerInfo = "Login success!"
           })
           .catch(response => {

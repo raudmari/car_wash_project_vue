@@ -25,7 +25,7 @@
     <v-dialog max-width="600px" v-model="drawer">
       <template v-slot:activator="{ on }">
         <div class="text-bottom">
-          <v-btn text class="success" v-on="on">Loo konto</v-btn>
+          <v-btn text rounded dark class="blue lighten-2" v-on="on">Loo autopesu konto</v-btn>
 
         </div>
       </template>
@@ -38,7 +38,7 @@
         <v-card-text>
           <v-form class="px-3" ref="form">
             <template v-slot:activator="{ on }">
-              <v-btn text class="success" v-on="on">Loo konto</v-btn>
+              <v-btn text dark rounded class="blue lighten-2" v-on="on">Loo konto</v-btn>
             </template>
             <v-text-field label="Eesnimi" :rules="[rules.required]" v-model="Eesnimi"></v-text-field>
             <v-text-field label="Perekonnanimi" :rules="[rules.required]" v-model="Perekonnanimi"></v-text-field>
@@ -67,7 +67,7 @@
             ></v-text-field>
             <template>
               <div class="text-center">
-                <v-btn v-on:click="looKasutajaNupp()" dark color="blue darken-2" :loading="loading">Loo konto</v-btn>
+                <v-btn v-on:click="looKasutajaNupp()" dark rounded color="blue lighten-2" :loading="loading">Loo konto</v-btn>
               </div>
 
             </template>
