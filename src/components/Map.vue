@@ -10,6 +10,7 @@
     >
       <GmapMarker :position="{lat: 53.9033, lng: -2.245}"/>
       <GmapMarker :position="{lat: 58.9033, lng: -3.245}"/>
+      <GmapMarker :position="{lat: 57.9033, lng: -4.245}"/>
     </GmapMap>
   </div>
 </template>
