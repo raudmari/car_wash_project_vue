@@ -29,6 +29,7 @@
           <v-date-picker
               v-model="date"
               @input="menu2 = false"
+              :allowed-dates="allowedDates"
           ></v-date-picker>
         </v-menu>
       </v-col>
@@ -58,6 +59,7 @@
             <v-time-picker
                 v-if="modal2"
                 v-model="time"
+                :allowed-minutes="allowedStep"
                 full-width
             >
               <v-spacer></v-spacer>
@@ -160,9 +162,11 @@ export default {
       'pin': ''
 
 
+
     }
   },
   methods: {
+
 
     'station': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/washStation")
@@ -192,8 +196,16 @@ export default {
 
           .catch(() => alert("Error"))
 
-    }
+    },
+
+    allowedStep: m => m % 15 === 0,
+
+    allowedDates: val => Date.parse(val) > Date.now() - 8.64e7,
+
+
   },
+
+
   mounted: function () {
     this.station()
     this.serviceType()
