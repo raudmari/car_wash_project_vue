@@ -45,7 +45,7 @@
 
 
 
-            <!--            <vue-tel-input-vuetify label="Telefon" v-model="Telefon" type="number" :rules="[rules.numberRule]"></vue-tel-input-vuetify>-->
+
             <v-text-field label="Telefon" v-model="Telefon" type="number" :rules="[rules.numberRule]"></v-text-field>
 
 
