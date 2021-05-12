@@ -1,14 +1,15 @@
 <template>
+  <div>
   <v-card width="400" class="mx-auto mt-5">
-    <v-card-title>
-      <h1 class="display-1" >Login</h1>
+    <v-card-title class="justify-center">
+      <h2 class="blue--text" >Login</h2>
     </v-card-title>
     <v-card-text>
       <v-form>
         <v-text-field v-model="email"
             label="e-posti aadress"
             prepend-icon="mdi-account-circle"
-            :rules="[rules.required, rules.emailRules]"
+            :rules="[rules.emailRules]"
         ></v-text-field>
         <v-text-field
             v-model="password"
@@ -23,9 +24,10 @@
         </v-btn>
       </v-form>
     </v-card-text>
-    {{answerInfo}}
-  </v-card>
 
+  </v-card>
+    {{answerInfo}}
+  </div>
 </template>
 <script>
 export default {
@@ -43,7 +45,7 @@ export default {
 }),
   methods: {
     'login': function () {
-      this.$http.post('/api/public/carWash/login', {
+      this.$http.post('/api/public/carwash/login', {
         'email':this.email,
         'password':this.password,
       })
@@ -52,8 +54,9 @@ export default {
             localStorage.setItem('user-token', response.data)
             this.$http.defaults.headers.common['Authorization'] = "Bearer " + response.data
             this.$store.commit("login",true)
-            this.$store.commit("account", false)
+            console.log("login success" );
             this.answerInfo = "Login success!"
+            this.$router.push('account')
           })
           .catch(response => {
             this.answerInfo = response.response.data.message

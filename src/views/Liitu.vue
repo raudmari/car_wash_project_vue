@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Liitu</h1>
   </div>
 </template>
 

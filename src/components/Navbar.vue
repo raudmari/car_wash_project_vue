@@ -9,12 +9,14 @@
       <span class="font-weight-bold">pesu</span>
       <v-spacer></v-spacer>
 
-      <v-btn icon rounded to="/account" v-if="!$store.state.authenticated">
+      <v-btn icon rounded v-if="$store.state.authenticated">
         <v-icon>mdi-account</v-icon>
       </v-btn>
-      <v-btn to='/JoinPopup' color="white"  text rounded class="my-2">Liitu</v-btn>
-      <v-btn to='/' v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
+      <v-btn to='/JoinPopup' v-if="!$store.state.authenticated" color="white"  text rounded class="my-2">Liitu</v-btn>
+
+      <v-btn v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
       <v-btn to='/login' v-if="!$store.state.authenticated" color="white" text rounded class="my-2">Login</v-btn>
+
 
     </v-app-bar>
     <v-navigation-drawer app v-model="drawer" class="blue lighten-2">
@@ -42,8 +44,8 @@ export default {
       localStorage.removeItem('user-token')
       location.reload()
       this.$store.commit("login",false)
-      this.$store.commit("account", true)
       this.answerInfo = "LogOut success!"
+      this.$router.push('/')
     }
   }
 }
@@ -64,9 +66,9 @@ export default {
         {icon: 'mdi-home', text: 'Pealehele', route: '/'},
         {icon: 'mdi-login', text: 'Login', route: '/Login'},
         {icon: 'mdi-account', text: 'Liitu', route: '/JoinPopup'},
-        {icon: 'mdi-book-online', text: 'Broneeri', route: '/Booking'},
-        {icon: 'mdi-local-car-wash', text: 'Pesulad/Teenused', route: '/teenused'},
-        {icon: 'mdi-people', text: 'Meeskond/Kontakt', route: '/meist'},
+        {icon: 'mdi-calendar-clock', text: 'Broneeri', route: '/Booking'},
+        {icon: 'mdi-car-wash', text: 'Pesulad/Teenused', route: '/teenused'},
+        {icon: 'mdi-account-group', text: 'Meeskond/Kontakt', route: '/meist'},
       ]
     }
   }

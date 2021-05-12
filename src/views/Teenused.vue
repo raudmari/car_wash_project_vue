@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 align="center" class="text-uppercase"> Teenused ja Pesulad</h1>
+  <div class="blue lighten-4">
     <Services />
     <Stations />
   </div>

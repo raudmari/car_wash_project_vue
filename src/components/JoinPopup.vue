@@ -1,9 +1,7 @@
 <template>
   <div class="text-center">
-    <h1>Liitudes on iga viies autopesu -50%</h1>
 
-
-
+    <h1 class="blue--text" >Liitudes on iga viies autopesu -50%</h1>
 
     <v-container fluid>
       <v-layout justify-center align-center>
@@ -167,7 +165,7 @@ export default {
         this.snackbar1 = true;
         this.loading = true;
 
-        this.$http.post('api/public/carWash/newAccountJoin', {
+        this.$http.post('api/public/carwash/newAccountJoin', {
           firstName: this.Eesnimi,
           lastName: this.Perekonnanimi,
           phone: this.Telefon,
