@@ -1,16 +1,17 @@
 <template>
+
   <div align="center">
     <v-container fluid>
       <!--    -------------------------KUUPÄEV-->
 
-        <v-col cols="12" sm="4">
-          <v-menu
-              v-model="menu2"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
+      <v-col cols="12" sm="4">
+        <v-menu
+            v-model="menu2"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
 
         >
 
@@ -115,7 +116,8 @@
             persistent-hint
         ></v-select>
       </v-col>
-<!--      ----------------------BRONEERI NUPP-->
+
+      <!--      ----------------------BRONEERI NUPP-->
       <v-row
           align="center"
           justify="space-around"
@@ -131,19 +133,18 @@
           BRONEERI
         </v-btn>
       </v-row>
-<!--      -----------------SÕNUM PEALE BRONEERIMIST-->
+      <!--      -----------------SÕNUM PEALE BRONEERIMIST-->
       <div class="mt-12 bottom-nav deprecated-label font-italic">
         <v-card-text>
           {{ message }}
           <v-spacer></v-spacer>
-            {{pinAnswer}}
+          {{ pinAnswer }}
         </v-card-text>
       </div>
 
     </v-container>
   </div>
 </template>
-
 <script>
 export default {
   data: function () {
@@ -162,14 +163,9 @@ export default {
       'message': '',
       'pinAnswer': '',
       'pin': ''
-
-
-
     }
   },
   methods: {
-
-
     'station': function () {
       this.$http.get("http://localhost:9090/api/public/carwash/washStation")
           .then(response => {
