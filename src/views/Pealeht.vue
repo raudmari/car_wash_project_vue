@@ -1,10 +1,8 @@
 <template>
   <div>
-    <h1>Pealeht</h1>
-    <v-content>
+    <v-main>
       <MainList />
-    </v-content>
-
+    </v-main>
   </div>
 
 </template>
