@@ -9,6 +9,7 @@ import Login from "../views/Login";
 import JoinPopup from '../components/JoinPopup'
 import Booking from "../components/Booking";
 import Account from "../components/Account";
+import Stations from "../components/Stations";
 
 Vue.use(VueRouter)
 
@@ -57,6 +58,11 @@ const routes = [
     path: '/Account',
     name: 'Account',
     component: Account
+  },
+  {
+    path: '/Pesulad',
+    name: 'Pesulad',
+    component: Stations
   }
 
 ]

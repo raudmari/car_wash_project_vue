@@ -45,7 +45,6 @@ export default {
       location.reload()
       this.$store.commit("login",false)
       this.answerInfo = "LogOut success!"
-      this.$router.push('/')
     }
   }
 }
@@ -67,8 +66,10 @@ export default {
         {icon: 'mdi-login', text: 'Login', route: '/Login'},
         {icon: 'mdi-account', text: 'Liitu', route: '/JoinPopup'},
         {icon: 'mdi-calendar-clock', text: 'Broneeri', route: '/Booking'},
-        {icon: 'mdi-car-wash', text: 'Pesulad/Teenused', route: '/teenused'},
-        {icon: 'mdi-account-group', text: 'Meeskond/Kontakt', route: '/meist'},
+        {icon: 'mdi-car-wash', text: 'Teenused', route: '/teenused'},
+        {icon: 'mdi-home-map-marker', text: 'Pesulad', route: '/Pesulad'},
+        {icon: 'mdi-account-group', text: 'Meeskond/Kontakt', route: '/meist'}
+
       ]
     }
   }

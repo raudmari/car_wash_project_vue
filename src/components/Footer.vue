@@ -24,7 +24,8 @@ export default {
     links: [
       { text: 'Pealehele', route: '/'},
       { text: 'Broneeri', route: '/broneeri'},
-      { text: 'Pesulad / teenused', route: '/teenused' },
+      { text: 'Teenused', route: '/teenused' },
+      { text: 'Pesulad', route: '/Pesulad' },
       { text: 'Meeskond / kontakt', route: '/meist'}
     ],
   }),

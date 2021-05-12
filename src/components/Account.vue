@@ -1,18 +1,23 @@
 <template>
-  <div  align="center">
-    <table border="1">
-      <th>aeg</th>
-      <th>pesula</th>
-      <th>pesu</th>
-      <tr v-for="history in userHistory">
-        <td>{{history.date_time}}</td>
-        <td>{{history.washStation}}</td>
-        <td>{{history.washType}}</td>
+  <v-simple-table>
+    <template v-slot:default>
+      <thead>
+      <tr>
+        <th class="text-right">Aeg</th>
+        <th class="text-center">Pesula</th>
+        <th class="text-left">Pesu</th>
       </tr>
-    </table>
-  </div>
+      </thead>
+      <tbody>
+      <tr v-for="history in accounts">
+        <td>{{ history.date_time }}</td>
+        <td>{{ history.washStation }}</td>
+        <td>{{ history.washType }}</td>
+      </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
 </template>
-
 <script>
 export default {
   data: function () {
@@ -20,14 +25,13 @@ export default {
       'date_time': '',
       'washStation': '',
       'washType': '',
-      userHistory: []
+      accounts: []
     }
   },
   mounted() {
     this.$http.get('/api/public/carwash/account')
-        .then(response => this.allStations = response.data);
+        .then(response => this.accounts = response.data);
   }
 }
-
 
 </script>
