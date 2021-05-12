@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-bottom">
 
     <GmapMap
         :center="{lat:10, lng:10}"
