@@ -1,9 +1,6 @@
 <template>
   <div>
   <v-card width="400" class="mx-auto mt-5">
-    <v-card-title class="justify-center">
-      <h2 class="blue--text" >Login</h2>
-    </v-card-title>
     <v-card-text>
       <v-form>
         <v-text-field v-model="email"
@@ -20,7 +17,7 @@
             'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
         ></v-text-field>
-        <v-btn v-on:click="login()" class="blue lighten-2" dark rounded>Login
+        <v-btn v-on:click="login()" class="blue lighten-2" dark rounded justify="space around">Login
         </v-btn>
       </v-form>
     </v-card-text>

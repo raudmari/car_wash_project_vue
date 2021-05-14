@@ -1,15 +1,15 @@
 <template>
   <div class="text-center">
     <br>
-    <h1>Autopesu projekti teostasid Vali-IT 20 lennu tudengid:</h1>
+    <h1 class="blue--text">Autopesu projekti teostasid Vali-IT 20 lennu tudengid:</h1>
     <br>
-    <h2>Märt Raudvee</h2>
-    <h2>Alari Kukk</h2>
-    <h2>Marion Raudsepp</h2>
+    <h2 class="blue--text">Märt Raudvee</h2>
+    <h2 class="blue--text">Alari Kukk</h2>
+    <h2 class="blue--text">Marion Raudsepp</h2>
     <br>
-    <h2>juhendaja: Siim Rebane</h2>
+    <h2 class="blue--text">juhendaja: Siim Rebane</h2>
     <br>
-    <h4>mai-2021</h4>
+    <h4 class="blue--text">mai-2021</h4>
   </div>
 </template>
 

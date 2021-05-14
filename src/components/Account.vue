@@ -23,8 +23,8 @@ export default {
   data: function () {
     return {
       'washDateTime': '',
-      'washStation': '',
-      'washType': '',
+      'washStationName': '',
+      'washTypeName': '',
       accounts: []
     }
   },
