@@ -1,8 +1,9 @@
 <template>
-  <v-simple-table>
+  <v-simple-table fixed-header
+                  height="600px">
     <template v-slot:default>
       <thead>
-      <tr>
+      <tr class="text-uppercase">
         <th class="text-right">Pesula</th>
         <th class="text-center">Asula</th>
         <th class="text-left">Aadress</th>
@@ -30,7 +31,7 @@ export default {
     }
   },
   mounted() {
-    this.$http.get('/api/public/carWash/stations')
+    this.$http.get('/api/public/carwash/stations')
         .then(response => this.allStations = response.data);
   }
 }

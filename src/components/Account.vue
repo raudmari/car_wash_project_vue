@@ -10,9 +10,9 @@
       </thead>
       <tbody>
       <tr v-for="history in accounts">
-        <td>{{ history.date_time }}</td>
-        <td>{{ history.washStation }}</td>
-        <td>{{ history.washType }}</td>
+        <td class="text-right">{{ history.washDateTime }}</td>
+        <td class="text-center">{{ history.washStationName }}</td>
+        <td class="text-left">{{ history.washTypeName }}</td>
       </tr>
       </tbody>
     </template>
@@ -22,7 +22,7 @@
 export default {
   data: function () {
     return {
-      'date_time': '',
+      'washDateTime': '',
       'washStation': '',
       'washType': '',
       accounts: []

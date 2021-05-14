@@ -9,9 +9,10 @@
       <span class="font-weight-bold">pesu</span>
       <v-spacer></v-spacer>
 
-      <v-btn icon rounded v-if="$store.state.authenticated">
+      <v-btn v-on:click="toAccount" icon rounded v-if="$store.state.authenticated">
         <v-icon>mdi-account</v-icon>
       </v-btn>
+
       <v-btn to='/JoinPopup' v-if="!$store.state.authenticated" color="white"  text rounded class="my-2">Liitu</v-btn>
 
       <v-btn v-on:click="logOut" v-if="$store.state.authenticated" color="white" text rounded class="my-2">Logout</v-btn>
@@ -45,6 +46,9 @@ export default {
       location.reload()
       this.$store.commit("login",false)
       this.answerInfo = "LogOut success!"
+    },
+    'toAccount': function() {
+      this.$router.push('account')
     }
   }
 }

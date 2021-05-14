@@ -19,8 +19,9 @@ export default {
   data() {
     return {
       links: [
-        {icon: 'today', text: 'Broneeri', route: '/broneeri'},
-        {icon: 'local_car_wash', text: 'Pesulad ja teenused', route: '/teenused'},
+        {icon: 'mdi-calendar-clock', text: 'Broneeri', route: '/broneeri'},
+        {icon: 'local_car_wash', text: 'Teenused', route: '/teenused'},
+        {icon: 'mdi-home-map-marker', text: 'Pesulad', route: '/pesulad'}
       ]
 
     }
